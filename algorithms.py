@@ -19,7 +19,7 @@ def insertion_sort(lst: list[T]) -> None:
     backwards until the element is correctly placed, repeating
     this until elements are correctly sorted.
 
-    Time complexity is O(n^2)
+    Time complexity is O(n^2).
     """
     i = 1
     while i < len(lst):
@@ -34,7 +34,7 @@ def merge_sort(lst: list[T]) -> list[T]:
     list down into single elements, merging two
     sorted sublists until a fully sorted list is produced.
 
-    Time complexity is O(n logn)
+    Time complexity is O(n logn).
     """
     if len(lst) <= 1:
         return lst.copy()
@@ -62,20 +62,28 @@ def merge(left: list[T], right: list[T]) -> list[T]:
     result.extend(right[r_index:])
     return result
 
-# def quick_sort(lst: list[T], lo, hi) -> None:
-#     if (lo >= hi) or (lo < 0):
-#         return
-#     p = partition(lst, lo, hi)
-#     quick_sort(lst, lo, p - 1)
-#     quick_sort(lst, p + 1, hi)
+def quick_sort(lst: list[T], lo, hi) -> None:
+    """Sorts a list by recursively partioning the input and sorting the elements
+    around a pivot, until a fully sorted list is produced.
 
-# def partition(lst: list[T], lo, hi) -> int:
-#     pivot = list[hi]
-#     temp_pivot_index = lo
-#     i = lo
-#     for j in range(i, (hi - 1)):
-#         if lst[i] <= pivot:
-#             lst[i], lst[pivot] = lst[pivot], lst[i]
-#             i += 1
-#     lst[i], lst[j] = lst[j], lst[i]
-#     return i
+    Time complexity is O(n logn).
+    """
+    if (lo >= hi) or (lo < 0):
+        return
+    p = partition(lst, lo, hi)
+    quick_sort(lst, lo, (p - 1))
+    quick_sort(lst, p + 1, hi)
+
+def partition(lst: list[T], lo, hi) -> int:
+    """Takes a sublist and swaps digits around a pivot, to the left if its lower than the
+    value of the pivot, and to the right if its higher than the value of the pivot.
+    """
+    pivot = lst[hi]
+    
+    i = lo
+    for j in range(lo, hi):
+        if lst[j] <= pivot:
+            lst[j], lst[i] = lst[i], lst[j]
+            i += 1
+    lst[i], lst[hi] = lst[hi], lst[i]
+    return i

@@ -12,13 +12,13 @@ def generate_unsorted_list(size: int) -> list[int]:
         unsorted_list.append(random.randint(1, 1000000))
     return unsorted_list
 
-def timer(sorting_method: Callable[[list], list], lst: list) -> tuple[list, float]:
+def timer(sorting_method: Callable[[list], list], lst: list, *args) -> tuple[list, float]:
     """Times how long it takes for each sorting method to sort a list, if incorrectly
     ordered, and then return it. Returns the sorted list and elapsed time, in seconds, as a tuple.
     """
     copied_list = lst.copy()
     start = time.perf_counter_ns()
-    sorted_list = sorting_method(copied_list) 
+    sorted_list = sorting_method(copied_list, *args) 
     end = time.perf_counter_ns()
     elapsed_time = (end - start) / 1_000_000_000  
     return sorted_list, elapsed_time
